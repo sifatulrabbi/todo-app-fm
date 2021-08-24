@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 export type ThemeType = typeof lightTheme;
 
 const lightTheme = {
+    dark: false,
     borderRadius: '5px',
     fontSize: '18px',
     fontFamily: `'Josefin Sans', sans-serif`,
@@ -32,6 +33,7 @@ const lightTheme = {
 
 const darkTheme: ThemeType = {
     ...lightTheme,
+    dark: true,
     boxShadow: `rgba(0,0,0,0.5) 0px 20px 35px -5px,
                 rgba(0,0,0,0.3) 0px 0px 10px 0px`,
     palette: {
@@ -74,6 +76,10 @@ const GlobalStyles = createGlobalStyle`
         outline: none;
         border: none;
         font-size: 1rem;
+    }
+
+    button {
+        cursor: pointer;
     }
     
     li, a {

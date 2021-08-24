@@ -1,10 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { lazy, Suspense } from 'react';
 import { ThemeProvider } from 'styled-components';
+import { AppWrapper } from './app.styles';
 import { darkTheme, lightTheme, GlobalStyles } from './Theme';
 
 const AddTodo = lazy(() => import('./Components/AddTodo/AddTodo'));
 const TodoList = lazy(() => import('./Components/TodoList/TodoList'));
+const Header = lazy(() => import('./Components/Header/Header'));
 
 export type TodoType = {
     id: string;
@@ -86,8 +88,11 @@ const App: React.FC = () => {
         <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
             <GlobalStyles />
             <Suspense fallback={<div>loading...</div>}>
-                <AddTodo handleAddTodo={handleAddTodo} />
-                <TodoList data={todoData} handleCheck={handleCheck} />
+                <AppWrapper>
+                    <Header toggler={toggleDarkMode} />
+                    <AddTodo handleAddTodo={handleAddTodo} />
+                    <TodoList data={todoData} handleCheck={handleCheck} />
+                </AppWrapper>
             </Suspense>
         </ThemeProvider>
     );
