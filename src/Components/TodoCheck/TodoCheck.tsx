@@ -19,7 +19,7 @@ const TodoCheck: React.FC<Props> = ({ handleCheck, id, complete }) => {
             onClick={handleClick}
             className={complete ? 'todoCheck checked' : 'todoCheck'}
          >
-            <img src={checkIcon} alt="" />
+            {complete && <img src={checkIcon} alt="" />}
          </button>
       </Container>
    );

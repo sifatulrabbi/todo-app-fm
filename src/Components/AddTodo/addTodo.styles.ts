@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
 export const Container = styled.form`
-    width: 100%;
-    height: max-content;
+   z-index: 2;
+   width: 100%;
+   height: max-content;
 
-    .addTodo__input {
-        width: 100%;
-        padding: 0.6rem;
-        font-size: 0.9rem;
-        background-color: gray;
-    }
+   .addTodo__input {
+      width: 100%;
+      padding: 1.2rem;
+      background-color: ${(p) => p.theme.palette.background.paper};
+      border-radius: ${(p) => p.theme.borderRadius};
+   }
 `;

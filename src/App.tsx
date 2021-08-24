@@ -76,6 +76,11 @@ const App: React.FC = () => {
       setTodoData(filteredTodoData);
    };
 
+   const handleRemoveTodo = (id: string) => {
+      const newTodoData: TodoType[] = allTodo.filter((todo) => todo.id !== id);
+      updateTodoData(newTodoData, true);
+   };
+
    React.useEffect(() => {
       getTodo();
    }, []);
@@ -92,7 +97,11 @@ const App: React.FC = () => {
                <div className="appContainer">
                   <Header toggler={toggleDarkMode} />
                   <AddTodo handleAddTodo={handleAddTodo} />
-                  <TodoList data={todoData} handleCheck={handleCheck} />
+                  <TodoList
+                     data={todoData}
+                     handleCheck={handleCheck}
+                     handleRemoveTodo={handleRemoveTodo}
+                  />
                </div>
             </AppWrapper>
          </Suspense>
