@@ -15,4 +15,11 @@ export const AppWrapper = styled.div`
         background-position: top;
         background-repeat: no-repeat;
     }
+
+    .appContainer {
+        width: 100%;
+        max-width: 550px;
+        height: max-content;
+        margin: 0 auto;
+    }
 `;
