@@ -15,7 +15,7 @@ const lightTheme = {
    palette: {
       fontColor: {
          primary: 'hsl(235, 19%, 35%)',
-         secondary: 'hsl(233, 11%, 84%)',
+         secondary: 'hsl(233, 11%, 64%)',
       },
       primary: {
          main: 'hsl(220, 98%, 61%)',

@@ -18,7 +18,7 @@ export const AppWrapper = styled.div`
 
    .appContainer {
       width: 100%;
-      max-width: 550px;
+      max-width: 650px;
       height: max-content;
       margin: 0 auto;
       padding: 1.3rem;

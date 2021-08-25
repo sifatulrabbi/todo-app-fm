@@ -7,11 +7,19 @@ import { darkTheme, lightTheme, GlobalStyles } from './Theme';
 const AddTodo = lazy(() => import('./Components/AddTodo/AddTodo'));
 const TodoList = lazy(() => import('./Components/TodoList/TodoList'));
 const Header = lazy(() => import('./Components/Header/Header'));
+const BottomBar = lazy(() => import('./Components/BottomBar/BottomBar'));
 
 export type TodoType = {
    id: string;
    name: string;
    complete: boolean;
+};
+
+type TabType = 'all' | 'active' | 'completed';
+
+export type Tab = {
+   tab: TabType;
+   handleTabChange: (tab: TabType) => void;
 };
 
 const LOCAL_KEY_TODO = 'todoAppFm.savedTodo';
@@ -26,6 +34,7 @@ const App: React.FC = () => {
    const [darkMode, setDarkMode] = React.useState<boolean>(true);
    const [allTodo, setAllTodo] = React.useState<TodoType[]>([]);
    const [todoData, setTodoData] = React.useState<TodoType[]>([sample]);
+   const [tab, setTab] = React.useState<TabType>('all');
 
    const toggleDarkMode = () => {
       setDarkMode((prev) => !prev);
@@ -69,15 +78,37 @@ const App: React.FC = () => {
       updateTodoData(newTodoData, true);
    };
 
-   const filterTodo = (all: boolean) => {
-      if (all) return;
-
-      const filteredTodoData: TodoType[] = allTodo.filter((todo) => todo.complete);
-      setTodoData(filteredTodoData);
-   };
-
    const handleRemoveTodo = (id: string) => {
       const newTodoData: TodoType[] = allTodo.filter((todo) => todo.id !== id);
+      updateTodoData(newTodoData, true);
+   };
+
+   const switchTodoTab = (tabName: TabType) => {
+      let newTodoData: TodoType[];
+
+      switch (true) {
+         case tabName === 'active':
+            newTodoData = allTodo.filter((todo) => !todo.complete);
+            setTodoData(newTodoData);
+            break;
+
+         case tabName === 'completed':
+            newTodoData = allTodo.filter((todo) => todo.complete);
+            setTodoData(newTodoData);
+            break;
+
+         default:
+            setTodoData(allTodo);
+      }
+   };
+
+   const handleTabChange = (tab: TabType) => {
+      setTab(tab);
+      switchTodoTab(tab);
+   };
+
+   const handleClearComplete = () => {
+      const newTodoData = allTodo.filter((todo) => !todo.complete);
       updateTodoData(newTodoData, true);
    };
 
@@ -101,7 +132,11 @@ const App: React.FC = () => {
                      data={todoData}
                      handleCheck={handleCheck}
                      handleRemoveTodo={handleRemoveTodo}
+                     tab={tab}
+                     handleTabChange={handleTabChange}
+                     handleClearComplete={handleClearComplete}
                   />
+                  <BottomBar tab={tab} handleTabChange={handleTabChange} />
                </div>
             </AppWrapper>
          </Suspense>

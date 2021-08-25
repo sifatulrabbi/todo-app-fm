@@ -1,15 +1,29 @@
 import React from 'react';
 import { TodoType } from '../../App';
+import Switcher from '../Switcher/Switcher';
 import TodoCheck from '../TodoCheck/TodoCheck';
 import { Container, Ul, Li } from './todoList.styles';
+import { Tab } from '../../App';
 
-interface Props {
+interface Props extends Tab {
    data?: TodoType[];
    handleCheck: (id: string) => void;
    handleRemoveTodo: (id: string) => void;
+   handleClearComplete: () => void;
 }
 
-const TodoList: React.FC<Props> = ({ data, handleCheck, handleRemoveTodo }) => {
+const TodoList: React.FC<Props> = ({
+   data,
+   tab,
+   handleCheck,
+   handleRemoveTodo,
+   handleTabChange,
+   handleClearComplete,
+}) => {
+   const notComplete = data?.filter((a) => !a.complete);
+
+   //TODO: drag and drop function;
+
    return (
       <Container>
          <Ul className="todoList">
@@ -30,6 +44,20 @@ const TodoList: React.FC<Props> = ({ data, handleCheck, handleRemoveTodo }) => {
                      </button>
                   </Li>
                ))}
+            <Li className="todoList__item__bottom">
+               <span className="todoList__item__btn text">
+                  {notComplete?.length} items left
+               </span>
+               <div className="todoList__item__bottom__wrapper">
+                  <Switcher tab={tab} handleTabChange={handleTabChange} />
+               </div>
+               <button
+                  className="todoList__item__btn text btn"
+                  onClick={handleClearComplete}
+               >
+                  clear complete
+               </button>
+            </Li>
          </Ul>
       </Container>
    );

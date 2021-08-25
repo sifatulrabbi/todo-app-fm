@@ -16,7 +16,7 @@ export const Ul = styled.ul`
 `;
 
 interface Props {
-   complete: boolean;
+   complete?: boolean;
 }
 
 export const Li = styled.li<Props>`
@@ -25,6 +25,18 @@ export const Li = styled.li<Props>`
    border-bottom: 1px solid ${(p) => p.theme.palette.inactive};
    display: grid;
    grid-template-columns: auto 1fr auto;
+
+   &.todoList__item__bottom {
+      max-width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      .todoList__item__bottom__wrapper {
+         @media screen and (max-width: 800px) {
+            display: none;
+         }
+      }
+   }
 
    &:last-child {
       border-bottom: none;
@@ -45,6 +57,18 @@ export const Li = styled.li<Props>`
    .todoList__item__btn {
       height: 1rem;
       width: 1rem;
+
+      &.text {
+         width: max-content;
+         color: ${(p) => p.theme.palette.fontColor.secondary};
+
+         &.btn {
+            transition: 300ms ease;
+            &:hover {
+               color: ${(p) => p.theme.palette.fontColor.primary};
+            }
+         }
+      }
 
       .todoList__item__btn__icon {
          fill: ${(p) => p.theme.palette.fontColor.secondary};
