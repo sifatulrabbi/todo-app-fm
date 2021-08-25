@@ -23,7 +23,7 @@ const sample: TodoType = {
 };
 
 const App: React.FC = () => {
-   const [darkMode, setDarkMode] = React.useState<boolean>(false);
+   const [darkMode, setDarkMode] = React.useState<boolean>(true);
    const [allTodo, setAllTodo] = React.useState<TodoType[]>([]);
    const [todoData, setTodoData] = React.useState<TodoType[]>([sample]);
 
